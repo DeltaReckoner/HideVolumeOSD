@@ -6,6 +6,7 @@ namespace HideVolumeOSD
 {
     public partial class UserSettings : Form
     {
+        public static bool IsActive;
         public UserSettings()
         {
             InitializeComponent();
@@ -17,6 +18,7 @@ namespace HideVolumeOSD
             radioButtonLight.Checked = Settings.Default.VolumeDisplayLight;
             radioButtonDark.Checked = !Settings.Default.VolumeDisplayLight;
             textBoxOffset.Text = Settings.Default.VolumeDisplayOffset.ToString();
+            checkBoxToggleHotkey.Checked = Settings.Default.VolumeDisplayHotkeyEnabled;
         }
 
         protected override void OnVisibleChanged(EventArgs e)
@@ -28,6 +30,12 @@ namespace HideVolumeOSD
                 Rectangle rect = Screen.FromHandle(this.Handle).Bounds;
                 Location = new Point(rect.Width - this.Width - 64, rect.Height - this.Height - 96);
             }
+        }
+
+
+        private void UserSettings_Load(object sender, EventArgs e)
+        {
+            IsActive = true;
         }
 
         protected override void OnClosed(EventArgs e)
@@ -57,26 +65,7 @@ namespace HideVolumeOSD
         private void buttonClose_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        private int GetCheckedIndex()
-        {
-            if (radioButtonSmall.Checked)
-            {
-                return 0;
-            }
-            else
-                if (radioButtonMedium.Checked)
-                {
-                    return 1;
-                }
-                else
-                    if (radioButtonBig.Checked)
-                    {
-                        return 2;
-                    }
-
-            return 0;
+            IsActive = false;
         }
 
         private void SetChecked(int value)
@@ -131,6 +120,13 @@ namespace HideVolumeOSD
             Settings.Default.VolumeDisplayNearClock = checkBoxClockPos.Checked;
         }
 
+
+        private void checkBoxToggleHotkey_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.VolumeDisplayHotkeyEnabled = checkBoxToggleHotkey.Checked;
+            textBoxToggleHotkey.Enabled = checkBoxToggleHotkey.Checked;
+        }
+
         private void radioButtonLight_CheckedChanged(object sender, EventArgs e)
         {
             Settings.Default.VolumeDisplayLight = radioButtonLight.Checked;
@@ -169,6 +165,13 @@ namespace HideVolumeOSD
             {
                 e.Handled = true;
             }
+        }
+
+        private void textBoxToggleHotkey_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+            textBoxToggleHotkey.Text = e.KeyChar.ToString();
+            Settings.Default.VolumeDisplayHotkey = e.KeyChar;
         }
     }
 }

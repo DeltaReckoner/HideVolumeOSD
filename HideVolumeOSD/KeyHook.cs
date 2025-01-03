@@ -30,6 +30,7 @@ namespace HideVolumeOSD
 
         public static event EventHandler VolumeKeyPressed = delegate {};
         public static event EventHandler VolumeKeyReleased = delegate {};
+        public static event EventHandler HotKeyReleased = delegate {};
 
         public static void StartListening()
         {
@@ -62,13 +63,25 @@ namespace HideVolumeOSD
                             VolumeKeyPressed(null, EventArgs.Empty);
                         }
                     }
-                    else
-                    if (wParam == (IntPtr)WM_KEYUP)
+                    else if (wParam == (IntPtr)WM_KEYUP)
                     {
                         if (VolumeKeyReleased != null)
                         {
                             VolumeKeyReleased(null, EventArgs.Empty);
                         }
+                    }
+                }
+            } 
+            else if (Settings.Default.VolumeDisplayHotkeyEnabled)
+            {
+                string formattedKey = Settings.Default.VolumeDisplayHotkey.ToString().ToUpperInvariant();
+                int key = char.Parse(formattedKey);
+
+                if (vkCode == key)
+                {
+                    if (wParam == (IntPtr)WM_KEYUP && !UserSettings.IsActive)
+                    {
+                        HotKeyReleased(null, EventArgs.Empty);
                     }
                 }
             }

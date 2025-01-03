@@ -31,6 +31,11 @@ namespace HideVolumeOSD
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBoxToggleHotkey = new System.Windows.Forms.TextBox();
+            this.checkBoxToggleHotkey = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxOffset = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.radioButtonBig = new System.Windows.Forms.RadioButton();
             this.radioButtonMedium = new System.Windows.Forms.RadioButton();
@@ -46,9 +51,7 @@ namespace HideVolumeOSD
             this.label3 = new System.Windows.Forms.Label();
             this.checkBoxSystemTrayVolume = new System.Windows.Forms.CheckBox();
             this.buttonClose = new System.Windows.Forms.Button();
-            this.textBoxOffset = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -57,6 +60,9 @@ namespace HideVolumeOSD
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.textBoxToggleHotkey);
+            this.groupBox1.Controls.Add(this.checkBoxToggleHotkey);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.textBoxOffset);
             this.groupBox1.Controls.Add(this.groupBox3);
@@ -70,10 +76,56 @@ namespace HideVolumeOSD
             this.groupBox1.Controls.Add(this.checkBoxSystemTrayVolume);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(407, 235);
+            this.groupBox1.Size = new System.Drawing.Size(407, 308);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sytem tray volume display";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(88, 272);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(24, 13);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "key";
+            // 
+            // textBoxToggleHotkey
+            // 
+            this.textBoxToggleHotkey.Location = new System.Drawing.Point(34, 270);
+            this.textBoxToggleHotkey.Name = "textBoxToggleHotkey";
+            this.textBoxToggleHotkey.Size = new System.Drawing.Size(48, 20);
+            this.textBoxToggleHotkey.TabIndex = 16;
+            this.textBoxToggleHotkey.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxToggleHotkey_KeyPress);
+            // 
+            // checkBoxToggleHotkey
+            // 
+            this.checkBoxToggleHotkey.AutoSize = true;
+            this.checkBoxToggleHotkey.Location = new System.Drawing.Point(11, 247);
+            this.checkBoxToggleHotkey.Name = "checkBoxToggleHotkey";
+            this.checkBoxToggleHotkey.Size = new System.Drawing.Size(94, 17);
+            this.checkBoxToggleHotkey.TabIndex = 15;
+            this.checkBoxToggleHotkey.Text = "Toggle hotkey";
+            this.checkBoxToggleHotkey.UseVisualStyleBackColor = true;
+            this.checkBoxToggleHotkey.CheckedChanged += new System.EventHandler(this.checkBoxToggleHotkey_CheckedChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(88, 194);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(103, 13);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "pixel offset from right";
+            // 
+            // textBoxOffset
+            // 
+            this.textBoxOffset.Location = new System.Drawing.Point(34, 192);
+            this.textBoxOffset.Name = "textBoxOffset";
+            this.textBoxOffset.Size = new System.Drawing.Size(48, 20);
+            this.textBoxOffset.TabIndex = 13;
+            this.textBoxOffset.TextChanged += new System.EventHandler(this.textBoxOffset_TextChanged);
+            this.textBoxOffset.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxOffset_KeyPress);
             // 
             // groupBox3
             // 
@@ -234,7 +286,7 @@ namespace HideVolumeOSD
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(344, 253);
+            this.buttonClose.Location = new System.Drawing.Point(344, 326);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
             this.buttonClose.TabIndex = 4;
@@ -242,34 +294,16 @@ namespace HideVolumeOSD
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
-            // textBoxOffset
-            // 
-            this.textBoxOffset.Location = new System.Drawing.Point(34, 192);
-            this.textBoxOffset.Name = "textBoxOffset";
-            this.textBoxOffset.Size = new System.Drawing.Size(48, 20);
-            this.textBoxOffset.TabIndex = 13;
-            this.textBoxOffset.TextChanged += new System.EventHandler(this.textBoxOffset_TextChanged);
-            this.textBoxOffset.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxOffset_KeyPress);
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(88, 195);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(103, 13);
-            this.label4.TabIndex = 14;
-            this.label4.Text = "pixel offset from right";
-            // 
             // UserSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(431, 285);
+            this.ClientSize = new System.Drawing.Size(431, 358);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -279,6 +313,7 @@ namespace HideVolumeOSD
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Settings";
+            this.Load += new System.EventHandler(this.UserSettings_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -310,5 +345,8 @@ namespace HideVolumeOSD
         private System.Windows.Forms.TextBox textBoxOffset;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.CheckBox checkBoxToggleHotkey;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBoxToggleHotkey;
     }
 }
