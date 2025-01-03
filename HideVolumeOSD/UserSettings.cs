@@ -144,11 +144,28 @@ namespace HideVolumeOSD
         private void textBoxOffset_TextChanged(object sender, EventArgs e)
         {
             Settings.Default.VolumeDisplayOffset = int.Parse(textBoxOffset.Text);
+            // Used if the user selects all text in the text box then erases the contents
+            bool validNumber = int.TryParse(textBoxOffset.Text, out int value);
+            if (validNumber)
+            {
+                Settings.Default.VolumeDisplayOffset = int.Parse(textBoxOffset.Text);
+            }
+            else
+            {
+                Settings.Default.VolumeDisplayOffset = 0;
+                textBoxOffset.Text = "0";
+            }
         }
 
         private void textBoxOffset_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            Keys key = (Keys)Enum.Parse(typeof(Keys), ((int)e.KeyChar).ToString());
+            if (key == Keys.Back && textBoxOffset.Text.Length <= 1)
+            {
+                e.Handled = true;
+                textBoxOffset.Text = "0";
+            }
+            if ((!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)))
             {
                 e.Handled = true;
             }
