@@ -39,7 +39,7 @@ namespace HideVolumeOSD
             }
             else
             {
-                volume = ((int)(getVolume() * 100)).ToString();
+                volume = Math.Round(getVolume() * 100, MidpointRounding.ToEven).ToString();
                 Refresh();
             }            
         }
