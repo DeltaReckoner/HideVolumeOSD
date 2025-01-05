@@ -92,11 +92,14 @@ namespace HideVolumeOSD
             // 
             // textBoxToggleHotkey
             // 
+            this.textBoxToggleHotkey.Enabled = false;
             this.textBoxToggleHotkey.Location = new System.Drawing.Point(34, 270);
             this.textBoxToggleHotkey.Name = "textBoxToggleHotkey";
             this.textBoxToggleHotkey.Size = new System.Drawing.Size(48, 20);
             this.textBoxToggleHotkey.TabIndex = 16;
+            this.textBoxToggleHotkey.Enter += new System.EventHandler(this.textBoxToggleHotkey_Enter);
             this.textBoxToggleHotkey.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxToggleHotkey_KeyPress);
+            this.textBoxToggleHotkey.Leave += new System.EventHandler(this.textBoxToggleHotkey_Leave);
             // 
             // checkBoxToggleHotkey
             // 

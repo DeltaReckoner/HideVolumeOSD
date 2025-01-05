@@ -6,7 +6,9 @@ namespace HideVolumeOSD
 {
     public partial class UserSettings : Form
     {
-        public static bool IsActive;
+        private static bool IsActive;
+        private static bool HotkeyBoxFocused;
+
         public UserSettings()
         {
             InitializeComponent();
@@ -19,6 +21,19 @@ namespace HideVolumeOSD
             radioButtonDark.Checked = !Settings.Default.VolumeDisplayLight;
             textBoxOffset.Text = Settings.Default.VolumeDisplayOffset.ToString();
             checkBoxToggleHotkey.Checked = Settings.Default.VolumeDisplayHotkeyEnabled;
+            textBoxToggleHotkey.Text = Settings.Default.VolumeDisplayHotkey;
+        }
+
+        // Used to ensure the user settings form is open
+        public static bool GetFormActive()
+        {
+            return IsActive;
+        }
+
+        // Used to ensure the hotkey is read only when the text box related to it is in focus
+        public static bool GetHotboxKeyFocused()
+        {
+            return HotkeyBoxFocused;
         }
 
         protected override void OnVisibleChanged(EventArgs e)
@@ -42,6 +57,7 @@ namespace HideVolumeOSD
         {
             base.OnClosed(e);
             Settings.Default.Save();
+            IsActive = false;
         }
 
         private void trackBarDelay_Scroll(object sender, EventArgs e)
@@ -155,7 +171,7 @@ namespace HideVolumeOSD
 
         private void textBoxOffset_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Keys key = (Keys)Enum.Parse(typeof(Keys), ((int)e.KeyChar).ToString());
+            Keys key = (Keys)Keys.Parse(typeof(Keys), ((int)e.KeyChar).ToString());
             if (key == Keys.Back && textBoxOffset.Text.Length <= 1)
             {
                 e.Handled = true;
@@ -169,9 +185,18 @@ namespace HideVolumeOSD
 
         private void textBoxToggleHotkey_KeyPress(object sender, KeyPressEventArgs e)
         {
+            textBoxToggleHotkey.Text = Settings.Default.VolumeDisplayHotkey;
             e.Handled = true;
-            textBoxToggleHotkey.Text = e.KeyChar.ToString();
-            Settings.Default.VolumeDisplayHotkey = e.KeyChar;
+        }
+
+        private void textBoxToggleHotkey_Enter(object sender, EventArgs e)
+        {
+            HotkeyBoxFocused = true;
+        }
+
+        private void textBoxToggleHotkey_Leave(object sender, EventArgs e)
+        {
+            HotkeyBoxFocused = false;
         }
     }
 }

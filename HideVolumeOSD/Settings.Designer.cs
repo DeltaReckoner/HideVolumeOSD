@@ -109,9 +109,10 @@ namespace HideVolumeOSD {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public char VolumeDisplayHotkey {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string VolumeDisplayHotkey {
             get {
-                return ((char)(this["VolumeDisplayHotkey"]));
+                return ((string)(this["VolumeDisplayHotkey"]));
             }
             set {
                 this["VolumeDisplayHotkey"] = value;

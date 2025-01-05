@@ -23,7 +23,7 @@
     <Setting Name="VolumeDisplayOffset" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">32</Value>
     </Setting>
-    <Setting Name="VolumeDisplayHotkey" Type="System.Char" Scope="User">
+    <Setting Name="VolumeDisplayHotkey" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="VolumeDisplayHotkeyEnabled" Type="System.Boolean" Scope="User">

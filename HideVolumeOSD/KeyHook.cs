@@ -71,15 +71,22 @@ namespace HideVolumeOSD
                         }
                     }
                 }
-            } 
+            }
+            // Sets the hotkey if the user settings page is active and the text to enter a hotkey is in focus
+            else if (UserSettings.GetFormActive() && UserSettings.GetHotboxKeyFocused())
+            {
+                Keys key = (Keys)Keys.Parse(typeof(Keys), (vkCode).ToString());
+                Settings.Default.VolumeDisplayHotkey = key.ToString();
+            }
+            // Triggers the hotkey if the toggle hotkey option is enabled
             else if (Settings.Default.VolumeDisplayHotkeyEnabled)
             {
-                string formattedKey = Settings.Default.VolumeDisplayHotkey.ToString().ToUpperInvariant();
-                int key = char.Parse(formattedKey);
+                string formattedKey = Settings.Default.VolumeDisplayHotkey;
+                int key = (int)Keys.Parse(typeof(Keys), formattedKey);
 
                 if (vkCode == key)
                 {
-                    if (wParam == (IntPtr)WM_KEYUP && !UserSettings.IsActive)
+                    if (wParam == (IntPtr)WM_KEYUP && !UserSettings.GetFormActive())
                     {
                         HotKeyReleased(null, EventArgs.Empty);
                     }
