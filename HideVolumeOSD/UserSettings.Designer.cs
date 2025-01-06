@@ -100,6 +100,7 @@ namespace HideVolumeOSD
             this.textBoxToggleHotkey.Enter += new System.EventHandler(this.textBoxToggleHotkey_Enter);
             this.textBoxToggleHotkey.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxToggleHotkey_KeyPress);
             this.textBoxToggleHotkey.Leave += new System.EventHandler(this.textBoxToggleHotkey_Leave);
+            this.textBoxToggleHotkey.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.textBoxToggleHotkey_PreviewKeyDown);
             // 
             // checkBoxToggleHotkey
             // 

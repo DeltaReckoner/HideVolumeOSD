@@ -22,6 +22,7 @@ namespace HideVolumeOSD
             textBoxOffset.Text = Settings.Default.VolumeDisplayOffset.ToString();
             checkBoxToggleHotkey.Checked = Settings.Default.VolumeDisplayHotkeyEnabled;
             textBoxToggleHotkey.Text = Settings.Default.VolumeDisplayHotkey;
+            KeyPreview = true;
         }
 
         // Used to ensure the user settings form is open
@@ -185,7 +186,6 @@ namespace HideVolumeOSD
 
         private void textBoxToggleHotkey_KeyPress(object sender, KeyPressEventArgs e)
         {
-            textBoxToggleHotkey.Text = Settings.Default.VolumeDisplayHotkey;
             e.Handled = true;
         }
 
@@ -197,6 +197,13 @@ namespace HideVolumeOSD
         private void textBoxToggleHotkey_Leave(object sender, EventArgs e)
         {
             HotkeyBoxFocused = false;
+        }
+
+        private void textBoxToggleHotkey_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            textBoxToggleHotkey.Text = e.KeyData.ToString();
+            Settings.Default.VolumeDisplayHotkey = e.KeyData.ToString();
+            Settings.Default.Save();
         }
     }
 }
