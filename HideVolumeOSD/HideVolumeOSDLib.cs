@@ -19,6 +19,9 @@ namespace HideVolumeOSD
         [DllImport("user32.dll", SetLastError = true)]
         private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern bool CloseWindow(IntPtr hWnd);
+
         [DllImport("user32.dll")]
         private static extern bool IsWindow(IntPtr hWnd);
 
@@ -217,7 +220,7 @@ namespace HideVolumeOSD
 
         private void KeyHook_VolumeKeyPressed(object sender, EventArgs e)
         {
-            if (Settings.Default.VolumeInSystemTray && Settings.Default.HideOSD)
+            if (Settings.Default.VolumeInSystemTray && Settings.Default.HideOSD && !Program.SilentRun)
             {
                 hideTimer.Stop();
                 showVolumeWindow(true);
@@ -321,6 +324,16 @@ namespace HideVolumeOSD
 
             if (notifyIcon != null)
                 notifyIcon.Icon = Resources.Icon;
+        }
+
+        public void CloseOSD()
+        {
+            if (!IsWindow(hWndInject))
+            {
+                Init();
+            }
+
+            CloseWindow(hWndInject);
         }
 
         public void ShowMessage(String message, ToolTipIcon icon)

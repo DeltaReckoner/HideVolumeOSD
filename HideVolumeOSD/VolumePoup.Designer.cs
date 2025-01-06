@@ -46,7 +46,6 @@ namespace HideVolumeOSD
             this.ShowInTaskbar = false;
             this.TopMost = true;
             this.ResumeLayout(false);
-
         }
 
         #endregion

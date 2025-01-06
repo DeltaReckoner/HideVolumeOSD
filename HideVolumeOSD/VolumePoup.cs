@@ -26,10 +26,12 @@ namespace HideVolumeOSD
             popup = this;
             threadVolume.Start();
         }
+
         public void Stop()
         {
             threadVolume.Abort();
         }
+
         public void updateValueSafe()
         {
             if (this.InvokeRequired)
