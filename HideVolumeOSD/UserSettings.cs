@@ -156,7 +156,6 @@ namespace HideVolumeOSD
 
         private void textBoxOffset_TextChanged(object sender, EventArgs e)
         {
-            Settings.Default.VolumeDisplayOffset = int.Parse(textBoxOffset.Text);
             // Used if the user selects all text in the text box then erases the contents
             bool validNumber = int.TryParse(textBoxOffset.Text, out int value);
             if (validNumber)
@@ -172,6 +171,7 @@ namespace HideVolumeOSD
 
         private void textBoxOffset_KeyPress(object sender, KeyPressEventArgs e)
         {
+            // Used if the backspace key was entered and there is less than or equal to 1 character in the text box
             Keys key = (Keys)Keys.Parse(typeof(Keys), ((int)e.KeyChar).ToString());
             if (key == Keys.Back && textBoxOffset.Text.Length <= 1)
             {

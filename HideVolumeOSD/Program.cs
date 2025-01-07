@@ -23,7 +23,7 @@ namespace HideVolumeOSD
         {
             if (mutex.WaitOne(TimeSpan.Zero, true))
             {
-                if ((args.Length == 1))
+                if (args.Length == 1)
                 {
                     HideVolumeOSDLib lib = new HideVolumeOSDLib(null);
 
@@ -32,7 +32,6 @@ namespace HideVolumeOSD
                     if (args[0] == "-silent")
                     {
                         lib.CloseOSD();
-                        SilentRun = true;
                     }
                     else if (args[0] == "-hide")
                     {
@@ -42,6 +41,7 @@ namespace HideVolumeOSD
                     {
                         lib.ShowOSD();
                     }
+                    Application.Exit();
                 }
                 else
                 {

@@ -113,10 +113,10 @@ namespace HideVolumeOSD
                 return;
             }
 
-            Application.ApplicationExit += Application_ApplicationExit;
-
             if (notifyIcon != null)
             {
+                Application.ApplicationExit += Application_ApplicationExit;
+
                 if (Settings.Default.HideOSD)
                     HideOSD();
                 else
@@ -220,7 +220,7 @@ namespace HideVolumeOSD
 
         private void KeyHook_VolumeKeyPressed(object sender, EventArgs e)
         {
-            if (Settings.Default.VolumeInSystemTray && Settings.Default.HideOSD && !Program.SilentRun)
+            if (Settings.Default.VolumeInSystemTray && Settings.Default.HideOSD)
             {
                 hideTimer.Stop();
                 showVolumeWindow(true);
