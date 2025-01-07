@@ -32,6 +32,7 @@ namespace HideVolumeOSD
                     if (args[0] == "-silent")
                     {
                         lib.CloseOSD();
+                        SilentRun = true;
                     }
                     else if (args[0] == "-hide")
                     {

@@ -31,6 +31,9 @@ namespace HideVolumeOSD
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.radioButtonClose = new System.Windows.Forms.RadioButton();
+            this.radioButtonMinimize = new System.Windows.Forms.RadioButton();
             this.label5 = new System.Windows.Forms.Label();
             this.textBoxToggleHotkey = new System.Windows.Forms.TextBox();
             this.checkBoxToggleHotkey = new System.Windows.Forms.CheckBox();
@@ -53,6 +56,7 @@ namespace HideVolumeOSD
             this.buttonClose = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.groupBox1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarDelay)).BeginInit();
@@ -60,6 +64,7 @@ namespace HideVolumeOSD
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.groupBox4);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.textBoxToggleHotkey);
             this.groupBox1.Controls.Add(this.checkBoxToggleHotkey);
@@ -80,6 +85,41 @@ namespace HideVolumeOSD
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sytem tray volume display";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.radioButtonClose);
+            this.groupBox4.Controls.Add(this.radioButtonMinimize);
+            this.groupBox4.Location = new System.Drawing.Point(274, 218);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(119, 80);
+            this.groupBox4.TabIndex = 12;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "OSD hide type";
+            // 
+            // radioButtonClose
+            // 
+            this.radioButtonClose.AutoSize = true;
+            this.radioButtonClose.Location = new System.Drawing.Point(17, 46);
+            this.radioButtonClose.Name = "radioButtonClose";
+            this.radioButtonClose.Size = new System.Drawing.Size(51, 17);
+            this.radioButtonClose.TabIndex = 9;
+            this.radioButtonClose.TabStop = true;
+            this.radioButtonClose.Text = "Close";
+            this.radioButtonClose.UseVisualStyleBackColor = true;
+            this.radioButtonClose.CheckedChanged += new System.EventHandler(this.radioButtonClose_CheckedChanged);
+            // 
+            // radioButtonMinimize
+            // 
+            this.radioButtonMinimize.AutoSize = true;
+            this.radioButtonMinimize.Location = new System.Drawing.Point(17, 23);
+            this.radioButtonMinimize.Name = "radioButtonMinimize";
+            this.radioButtonMinimize.Size = new System.Drawing.Size(65, 17);
+            this.radioButtonMinimize.TabIndex = 8;
+            this.radioButtonMinimize.TabStop = true;
+            this.radioButtonMinimize.Text = "Minimize";
+            this.radioButtonMinimize.UseVisualStyleBackColor = true;
+            this.radioButtonMinimize.CheckedChanged += new System.EventHandler(this.radioButtonMinimize_CheckedChanged);
             // 
             // label5
             // 
@@ -136,9 +176,9 @@ namespace HideVolumeOSD
             this.groupBox3.Controls.Add(this.radioButtonBig);
             this.groupBox3.Controls.Add(this.radioButtonMedium);
             this.groupBox3.Controls.Add(this.radioButtonSmall);
-            this.groupBox3.Location = new System.Drawing.Point(291, 121);
+            this.groupBox3.Location = new System.Drawing.Point(274, 107);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(102, 100);
+            this.groupBox3.Size = new System.Drawing.Size(119, 100);
             this.groupBox3.TabIndex = 12;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Size of display";
@@ -183,9 +223,9 @@ namespace HideVolumeOSD
             // 
             this.groupBox2.Controls.Add(this.radioButtonDark);
             this.groupBox2.Controls.Add(this.radioButtonLight);
-            this.groupBox2.Location = new System.Drawing.Point(291, 29);
+            this.groupBox2.Location = new System.Drawing.Point(274, 15);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(102, 80);
+            this.groupBox2.Size = new System.Drawing.Size(119, 80);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Display style";
@@ -320,6 +360,8 @@ namespace HideVolumeOSD
             this.Load += new System.EventHandler(this.UserSettings_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -352,5 +394,8 @@ namespace HideVolumeOSD
         private System.Windows.Forms.CheckBox checkBoxToggleHotkey;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBoxToggleHotkey;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.RadioButton radioButtonClose;
+        private System.Windows.Forms.RadioButton radioButtonMinimize;
     }
 }

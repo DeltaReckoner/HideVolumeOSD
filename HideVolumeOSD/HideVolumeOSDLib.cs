@@ -238,7 +238,7 @@ namespace HideVolumeOSD
 
         private void KeyHook_HotKeyReleased(object sender, EventArgs e)
         {
-            if (Settings.Default.VolumeInSystemTray && Settings.Default.VolumeDisplayHotkeyEnabled)
+            if (Settings.Default.VolumeDisplayHotkeyEnabled)
             {
                 if (Settings.Default.HideOSD)
                 {
@@ -334,6 +334,9 @@ namespace HideVolumeOSD
             }
 
             CloseWindow(hWndInject);
+
+            if (notifyIcon != null && !Program.SilentRun)
+                notifyIcon.Icon = Resources.IconDisabled;
         }
 
         public void ShowMessage(String message, ToolTipIcon icon)

@@ -107,7 +107,14 @@ namespace HideVolumeOSD
 		{
 			if (!Settings.Default.HideOSD)
 			{
-				hideVolumeOSDLib.HideOSD();
+				if (Settings.Default.OSDHideType == 0)
+				{
+					hideVolumeOSDLib.HideOSD();
+				}
+				else
+				{
+					hideVolumeOSDLib.CloseOSD();
+				}
 				Settings.Default.HideOSD = true;
 				switchMenu.ImageIndex = 0;
 				switchMenu.Text = "Show Volume OSD";

@@ -15,10 +15,12 @@ namespace HideVolumeOSD
 
             checkBoxSystemTrayVolume.Checked = Settings.Default.VolumeInSystemTray;
             trackBarDelay.Value = Settings.Default.VolumeHideDelay;
-            SetChecked(Settings.Default.VolumeDisplaySize);
+            SetDisplaySizeChecked(Settings.Default.VolumeDisplaySize);
             checkBoxClockPos.Checked = Settings.Default.VolumeDisplayNearClock;
             radioButtonLight.Checked = Settings.Default.VolumeDisplayLight;
             radioButtonDark.Checked = !Settings.Default.VolumeDisplayLight;
+            radioButtonMinimize.Checked = Settings.Default.OSDHideType == 0 ? true : false;
+            radioButtonClose.Checked = Settings.Default.OSDHideType == 1 ? true : false;
             textBoxOffset.Text = Settings.Default.VolumeDisplayOffset.ToString();
             checkBoxToggleHotkey.Checked = Settings.Default.VolumeDisplayHotkeyEnabled;
             textBoxToggleHotkey.Text = Settings.Default.VolumeDisplayHotkey;
@@ -81,11 +83,11 @@ namespace HideVolumeOSD
     
         private void buttonClose_Click(object sender, EventArgs e)
         {
-            Close();
             IsActive = false;
+            Close();
         }
 
-        private void SetChecked(int value)
+        private void SetDisplaySizeChecked(int value)
         {
             switch (value)
             {
@@ -106,13 +108,14 @@ namespace HideVolumeOSD
             }
 
             Settings.Default.VolumeDisplaySize = value;
+            Settings.Default.Save();
         }
 
         private void radioButtonSmall_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButtonSmall.Checked)
             {
-                SetChecked(0);
+                SetDisplaySizeChecked(0);
             }
         }
 
@@ -120,7 +123,7 @@ namespace HideVolumeOSD
         {
             if (radioButtonMedium.Checked)
             {
-                SetChecked(1);
+                SetDisplaySizeChecked(1);
             }
         }
 
@@ -128,13 +131,14 @@ namespace HideVolumeOSD
         {
             if (radioButtonBig.Checked)
             {
-                SetChecked(2);
+                SetDisplaySizeChecked(2);
             }
         }
 
         private void checkBoxClockPos_CheckedChanged(object sender, EventArgs e)
         {
             Settings.Default.VolumeDisplayNearClock = checkBoxClockPos.Checked;
+            Settings.Default.Save();
         }
 
 
@@ -142,16 +146,19 @@ namespace HideVolumeOSD
         {
             Settings.Default.VolumeDisplayHotkeyEnabled = checkBoxToggleHotkey.Checked;
             textBoxToggleHotkey.Enabled = checkBoxToggleHotkey.Checked;
+            Settings.Default.Save();
         }
 
         private void radioButtonLight_CheckedChanged(object sender, EventArgs e)
         {
             Settings.Default.VolumeDisplayLight = radioButtonLight.Checked;
+            Settings.Default.Save();
         }
 
         private void radioButtonDark_CheckedChanged(object sender, EventArgs e)
         {
             Settings.Default.VolumeDisplayLight = radioButtonLight.Checked;
+            Settings.Default.Save();
         }
 
         private void textBoxOffset_TextChanged(object sender, EventArgs e)
@@ -203,6 +210,18 @@ namespace HideVolumeOSD
         {
             textBoxToggleHotkey.Text = e.KeyData.ToString();
             Settings.Default.VolumeDisplayHotkey = e.KeyData.ToString();
+            Settings.Default.Save();
+        }
+
+        private void radioButtonMinimize_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.OSDHideType = 0;
+            Settings.Default.Save();
+        }
+
+        private void radioButtonClose_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.OSDHideType = 1;
             Settings.Default.Save();
         }
     }

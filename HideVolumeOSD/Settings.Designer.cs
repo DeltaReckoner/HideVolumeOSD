@@ -130,5 +130,17 @@ namespace HideVolumeOSD {
                 this["VolumeDisplayHotkeyEnabled"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int OSDHideType {
+            get {
+                return ((int)(this["OSDHideType"]));
+            }
+            set {
+                this["OSDHideType"] = value;
+            }
+        }
     }
 }
